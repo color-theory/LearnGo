@@ -15,13 +15,15 @@ type Salutation struct {
 }
 
 func Greet(salutation Salutation) {
-	_, alternate := CreateMessage(salutation.name, salutation.greeting) //_  ignores first return from CreateMessage, while alternate gets second returned string.
-
+	first, alternate := CreateMessage(salutation.name, salutation.greeting) //first takes first return from CreateMessage, while alternate gets second returned string.
+	fmt.Println(first)
 	fmt.Println(alternate)
 }
 
-func CreateMessage(name, greeting string) (string, string) { //create message takes name and greeting as string and returns two strings
-	return greeting + " " + name, "Hey! " + name //returns first string followed by second string
+func CreateMessage(name, greeting string) (message string, alternate string) { //CreateMessage takes name and greeting as strings and returns two named strings
+	message = greeting + " " + name
+	alternate = "Hey! " + name
+	return //returns both message and alternate
 }
 
 func main() {
