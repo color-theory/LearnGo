@@ -15,7 +15,9 @@ type Salutation struct {
 	greeting string
 }
 
-func Greet(salutation Salutation, do func(string)) { //Greet takes in a salutation and a function as parameters
+type Printer func(string) () // Declaring a type Printer that is a function that takes a string and returns nothing hence the ()
+
+func Greet(salutation Salutation, do Printer) { //Greet takes in a salutation and a Printer
 	last, alternate := CreateMessage(salutation.name, salutation.greeting, "yo!", "sup!") //first takes first return from CreateMessage,
 
 	do(last) //calls the passed in function with last greeting
