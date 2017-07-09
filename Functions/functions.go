@@ -15,11 +15,11 @@ type Salutation struct {
 	greeting string
 }
 
-func Greet(salutation Salutation) {
-	first, alternate := CreateMessage(salutation.name, salutation.greeting, "yo!", "sup!") 	//first takes first return from CreateMessage,
-																					// while alternate gets second returned string. Passing in a 3rd parameter as second greeting
-	fmt.Println(first)
-	fmt.Println(alternate)
+func Greet(salutation Salutation, do func(string)) { //Greet takes in a salutation and a function as parameters
+	last, alternate := CreateMessage(salutation.name, salutation.greeting, "yo!", "sup!") //first takes first return from CreateMessage,
+
+	do(last) //calls the passed in function with last greeting
+	do(alternate)
 }
 
 func CreateMessage(name string, greeting ...string) (message string, alternate string) { //CreateMessage takes name and greeting as strings and returns two named strings
@@ -29,7 +29,16 @@ func CreateMessage(name string, greeting ...string) (message string, alternate s
 	return //returns both message and alternate
 }
 
+func Print(s string) {
+	fmt.Print(s)
+}
+
+func PrintLine(s string) {
+	fmt.Println(s)
+}
+
 func main() {
 	var s = Salutation{"Bob", "Hello"}
-	Greet(s) //calls Greet with s
+	Greet(s, Print)     //calls Greet with s, and Print func
+	Greet(s, PrintLine) //calls Greet with s, and PrintLine func
 }
