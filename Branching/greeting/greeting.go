@@ -21,13 +21,13 @@ func Greet(salutation Salutation, do Printer, isFormal bool) {
 }
 
 func GetPrefix(name string) (prefix string) {
-	switch name {
-	case "Bob":
+	switch { //this is now switching on a boolean equal to true
+	case name == "Bob": // now needing to change case to an expression that evaluates to a bool
 		prefix = "Mr "
 		fallthrough // after setting prefix to "Mr ", it falls through and sets prefix to "Dr "
-	case "Joe":
+	case name == "Joe":
 		prefix = "Dr "
-	case "Mary", "Amy":
+	case name == "Mary", name == "Amy", len(name) == 10:
 		prefix = "Mrs "
 	default:
 		prefix = "Dude "

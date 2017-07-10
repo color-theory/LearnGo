@@ -19,7 +19,7 @@ func main() {
 	var s = greeting.Salutation{"Bob", "Hello"}
 	greeting.Greet(s, greeting.CreatePrintFunction("!!closure!"), true)
 
-	var t = greeting.Salutation{"Amy", "Hello"}
+	var t = greeting.Salutation{"Amy4567890", "Hello"}
 	greeting.Greet(t, greeting.CreatePrintFunction("!~<3"), true)
 
 }
