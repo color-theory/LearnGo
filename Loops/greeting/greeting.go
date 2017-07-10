@@ -14,20 +14,22 @@ type Printer func(string) ()
 func Greet(salutation Salutation, do Printer, isFormal bool, times int) {
 	message, alternate := CreateMessage(salutation.Name, salutation.Greeting)
 
-	for i := 0; i < times; i++ { // run loop the amount of times passed in to Greet
-		if prefix := GetPrefix(salutation.Name); isFormal { //an optional statement gets prefix based on name if isFormal.
+	i := 0
+	for i < times { // while i < times
+		if prefix := GetPrefix(salutation.Name); isFormal {
 			do(prefix + message)
 		} else {
 			do(alternate)
 		}
+		i++  // increment i
 	}
 }
 
 func GetPrefix(name string) (prefix string) {
-	switch { //this is now switching on a boolean equal to true
-	case name == "Bob": // now needing to change case to an expression that evaluates to a bool
+	switch {
+	case name == "Bob":
 		prefix = "Mr "
-		fallthrough // after setting prefix to "Mr ", it falls through and sets prefix to "Dr "
+		fallthrough
 	case name == "Joe":
 		prefix = "Dr "
 	case name == "Mary", name == "Amy", len(name) == 10:
