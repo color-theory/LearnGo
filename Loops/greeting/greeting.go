@@ -15,13 +15,21 @@ func Greet(salutation Salutation, do Printer, isFormal bool, times int) {
 	message, alternate := CreateMessage(salutation.Name, salutation.Greeting)
 
 	i := 0
-	for i < times { // while i < times
+	for { // forever
+		if i >= times{
+			break //break out of the loop
+		}
+
+		if i % 2 == 0 { // if there is no remainder when dividing by 2. Even number
+			i++
+			continue // jump back up to the beginning of the loop
+		}
 		if prefix := GetPrefix(salutation.Name); isFormal {
 			do(prefix + message)
 		} else {
 			do(alternate)
 		}
-		i++  // increment i
+		i++
 	}
 }
 
