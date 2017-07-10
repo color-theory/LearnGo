@@ -7,6 +7,12 @@ package main
 import "./greeting"
 
 func main() {
-	var s = greeting.Salutation{"Amy", "Hello"}
-	greeting.Greet(s, greeting.CreatePrintFunction("!~<3"), true, 6) //run greet 5 times
+
+	slice := []greeting.Salutation{  // setting up our slice
+		{"Bob", "Hello"},
+		{"Joe", "Hey"},
+		{"Mary", "What is up"},
+	}
+
+	greeting.Greet(slice, greeting.CreatePrintFunction("!~<3"), true) // call with our slice
 }

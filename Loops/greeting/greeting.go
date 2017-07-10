@@ -11,25 +11,17 @@ type Salutation struct {
 
 type Printer func(string) ()
 
-func Greet(salutation Salutation, do Printer, isFormal bool, times int) {
-	message, alternate := CreateMessage(salutation.Name, salutation.Greeting)
+func Greet(salutation []Salutation, do Printer, isFormal bool) {
 
-	i := 0
-	for { // forever
-		if i >= times{
-			break //break out of the loop
-		}
+	for i , s := range salutation { // loop through each item in salutation
+		message, alternate := CreateMessage(s.Name, s.Greeting) // need to use s now
 
-		if i % 2 == 0 { // if there is no remainder when dividing by 2. Even number
-			i++
-			continue // jump back up to the beginning of the loop
-		}
-		if prefix := GetPrefix(salutation.Name); isFormal {
+		if prefix := GetPrefix(s.Name); isFormal {
+			fmt.Print(i) // print the index
 			do(prefix + message)
 		} else {
 			do(alternate)
 		}
-		i++
 	}
 }
 
