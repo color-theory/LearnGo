@@ -22,4 +22,5 @@ func main() {
 	var t = greeting.Salutation{"Amy4567890", "Hello"}
 	greeting.Greet(t, greeting.CreatePrintFunction("!~<3"), true)
 
+	greeting.TypeSwitchTest(13)
 }
