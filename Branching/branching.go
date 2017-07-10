@@ -18,7 +18,8 @@ import "./greeting"
 func main() {
 	var s = greeting.Salutation{"Bob", "Hello"}
 	greeting.Greet(s, greeting.CreatePrintFunction("!!closure!"), true)
-	s = greeting.Salutation{"Mary", "Hello"}
-	greeting.Greet(s, greeting.CreatePrintFunction("!~<3"), true)
+
+	var t = greeting.Salutation{"Amy", "Hello"}
+	greeting.Greet(t, greeting.CreatePrintFunction("!~<3"), true)
 
 }
