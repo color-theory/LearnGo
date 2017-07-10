@@ -13,7 +13,7 @@ type Printer func(string) ()
 
 func Greet(salutation []Salutation, do Printer, isFormal bool) {
 
-	for i , s := range salutation { // loop through each item in salutation
+	for i, s := range salutation { // loop through each item in salutation
 		message, alternate := CreateMessage(s.Name, s.Greeting) // need to use s now
 
 		if prefix := GetPrefix(s.Name); isFormal {
@@ -26,18 +26,16 @@ func Greet(salutation []Salutation, do Printer, isFormal bool) {
 }
 
 func GetPrefix(name string) (prefix string) {
-	switch {
-	case name == "Bob":
-		prefix = "Mr "
-		fallthrough
-	case name == "Joe":
-		prefix = "Dr "
-	case name == "Mary", name == "Amy", len(name) == 10:
-		prefix = "Mrs "
-	default:
-		prefix = "Dude "
-	}
-	return
+
+	var prefixMap map[string]string     //create variable for map
+	prefixMap = make(map[string]string) //initialize map
+
+	prefixMap["Bob"] = "Mr "
+	prefixMap["Joe"] = "Dr "
+	prefixMap["Amy"] = "Dr " // although keys must be unique, values can be duplicated
+	prefixMap["Mary"] = "Mrs "
+
+	return prefixMap[name]
 }
 
 func CreateMessage(name string, greeting string) (message string, alternate string) {
