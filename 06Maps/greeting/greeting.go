@@ -27,13 +27,12 @@ func Greet(salutation []Salutation, do Printer, isFormal bool) {
 
 func GetPrefix(name string) (prefix string) {
 
-	var prefixMap map[string]string     //create variable for map
-	prefixMap = make(map[string]string) //initialize map
-
-	prefixMap["Bob"] = "Mr "
-	prefixMap["Joe"] = "Dr "
-	prefixMap["Amy"] = "Dr " // although keys must be unique, values can be duplicated
-	prefixMap["Mary"] = "Mrs "
+	prefixMap := map[string]string{ //shorthand map if the map will be static.
+		"Bob" : "Mr ",
+		"Joe" : "Dr ",
+		"Amy" : "Dr ", // although keys must be unique, values can be duplicated
+		"Mary" : "Mrs ",
+	}
 
 	return prefixMap[name]
 }
