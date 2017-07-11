@@ -28,10 +28,10 @@ func Greet(salutation []Salutation, do Printer, isFormal bool) {
 func GetPrefix(name string) (prefix string) {
 
 	prefixMap := map[string]string{ //shorthand map if the map will be static.
-		"Bob" : "Mr ",
-		"Joe" : "Dr ",
-		"Amy" : "Dr ", // although keys must be unique, values can be duplicated
-		"Mary" : "Mrs ",
+		"Bob":  "Mr ",
+		"Joe":  "Dr ",
+		"Amy":  "Dr ", // although keys must be unique, values can be duplicated
+		"Mary": "Mrs ",
 	}
 
 	prefixMap["Joe"] = "Jr " // updating the map value for key "Joe"
@@ -39,7 +39,11 @@ func GetPrefix(name string) (prefix string) {
 	// prefixMap["Mary"] = "", false  ---- old way of deleting from a map
 	delete(prefixMap, "Mary") // deleting from a map
 
-	return prefixMap[name]
+	if value, exists := prefixMap[name]; exists { //prefixMap returns true in exists if name is a key in prefixMap
+		return value // return the value that does indeed exist
+	}
+
+	return "Dude" // return the default if the key doesn't match
 }
 
 func CreateMessage(name string, greeting string) (message string, alternate string) {
