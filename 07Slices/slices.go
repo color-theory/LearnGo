@@ -27,6 +27,9 @@ func main() {
 		{"Mary", "What is up"},
 	}
 
+	slice = append(slice, greeting.Salutation{"Frank", "Hi"}) // adding frank to slice
+	slice = append(slice, slice...)                           //double up
+
 	//	slice = slice[1:2] inclusive on start index, exclusive on ending index. Joe Only
 	//	slice = slice[:2]  Bob and Joe
 	slice = slice[1:]                                                 // Joe and Mary
