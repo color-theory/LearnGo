@@ -1,5 +1,8 @@
 /**
  * Methods
+ * Methods have a type declared that it can act on
+ * Go Methods can work on any named type(including built in types)
+ * Go methods can operate on pointers to named types.
  */
 package main
 
@@ -7,12 +10,11 @@ import "./greeting"
 
 func main() {
 
-	slice := []greeting.Salutation{
+	salutations := greeting.Salutations{
 		{"Bob", "Hello"},
 		{"Joe", "Hey"},
 		{"Mary", "What is up"},
 	}
 
-	slice = append(slice, greeting.Salutation{"Frank", "Hi"})
-	greeting.Greet(slice, greeting.CreatePrintFunction("!~<3"), true)
+	salutations.Greet(greeting.CreatePrintFunction("!~<3"), true) //calling the Greet method on salutations.
 }

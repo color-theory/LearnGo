@@ -11,9 +11,11 @@ type Salutation struct {
 
 type Printer func(string) ()
 
-func Greet(salutation []Salutation, do Printer, isFormal bool) {
+type Salutations []Salutation //setting up our named type
 
-	for i, s := range salutation {
+func (salutations Salutations) Greet(do Printer, isFormal bool) { //changing our function to be a method that acts on Salutations type
+
+	for i, s := range salutations {
 		message, alternate := CreateMessage(s.Name, s.Greeting)
 
 		if prefix := GetPrefix(s.Name); isFormal {
