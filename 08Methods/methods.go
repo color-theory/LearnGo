@@ -16,5 +16,7 @@ func main() {
 		{"Mary", "What is up"},
 	}
 
+	salutations[0].Rename("John") // rename the Salutation at the 0 index
+
 	salutations.Greet(greeting.CreatePrintFunction("!~<3"), true) //calling the Greet method on salutations.
 }

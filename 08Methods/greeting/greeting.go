@@ -9,6 +9,10 @@ type Salutation struct {
 	Greeting string
 }
 
+func (salutation *Salutation) Rename(newName string) { //must work on a pointer of Salutation or it will be working on a copy
+	salutation.Name = newName
+}
+
 type Printer func(string) ()
 
 type Salutations []Salutation //setting up our named type
