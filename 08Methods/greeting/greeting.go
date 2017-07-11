@@ -9,8 +9,21 @@ type Salutation struct {
 	Greeting string
 }
 
+type RenameType struct {
+	Name string
+}
+
+type Renamable interface {
+	// define our interface
+	Rename(newName string) //if the type implements a method of Rename, it can be passed as a Renamable
+}
+
 func (salutation *Salutation) Rename(newName string) { //must work on a pointer of Salutation or it will be working on a copy
 	salutation.Name = newName
+}
+
+func (renametype *RenameType) Rename(newName string) { // This should also be implementing Renamable's methods
+	renametype.Name = newName
 }
 
 type Printer func(string) ()
