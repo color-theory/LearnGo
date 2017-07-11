@@ -27,5 +27,8 @@ func main() {
 		{"Mary", "What is up"},
 	}
 
+	//	slice = slice[1:2] inclusive on start index, exclusive on ending index. Joe Only
+	//	slice = slice[:2]  Bob and Joe
+	slice = slice[1:]                                                 // Joe and Mary
 	greeting.Greet(slice, greeting.CreatePrintFunction("!~<3"), true) // call with our slice
 }
