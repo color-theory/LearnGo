@@ -11,6 +11,7 @@ package main
 import (
 	"./greeting"
 	"fmt"
+	"time"
 )
 
 func RenameToFrog(r greeting.Renamable) {
@@ -37,5 +38,9 @@ func main() {
 
 	fmt.Fprintf(&salutations[0], "The count is %d", 10)
 
+	go salutations.Greet(greeting.CreatePrintFunction("<CONCURRENT>"), true) // runs this as a go routine
 	salutations.Greet(greeting.CreatePrintFunction("!~<3"), true)
+
+	time.Sleep(100*time.Millisecond) // we must wait or else the program will exit before the go routine executes
 }
+
