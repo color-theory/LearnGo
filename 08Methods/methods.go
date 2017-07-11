@@ -7,6 +7,7 @@
  * No way to require that an interface be implemented.
  * As long as a type implements the methods defined in an interface, it implements that interface
  * Allows you to pass multiple types into a function by passing in an interface
+ * an empty interface is implemented by any type.
  */
 package main
 
@@ -36,6 +37,8 @@ func main() {
 
 	RenameToFrog(&renametype) // This workds because it is also a Renamable
 	fmt.Println(renametype)
+
+	fmt.Fprintf(&salutations[0], "The count is %d", 10) // this can work on salutations because it can be passed as a Writer now
 
 	salutations.Greet(greeting.CreatePrintFunction("!~<3"), true) //calling the Greet method on salutations.
 }

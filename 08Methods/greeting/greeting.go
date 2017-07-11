@@ -18,6 +18,14 @@ type Renamable interface {
 	Rename(newName string) //if the type implements a method of Rename, it can be passed as a Renamable
 }
 
+func (salutation *Salutation) Write(p []byte) (n int, err error) { // *Salutation is now a Writer!
+	s := string(p)
+	salutation.Rename(s)
+	n = len(s)
+	err = nil
+	return
+}
+
 func (salutation *Salutation) Rename(newName string) { //must work on a pointer of Salutation or it will be working on a copy
 	salutation.Name = newName
 }
