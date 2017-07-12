@@ -11,6 +11,7 @@ package main
 import (
 	"./greeting"
 	"fmt"
+	"time"
 )
 
 func RenameToFrog(r greeting.Renamable) {
@@ -37,14 +38,17 @@ func main() {
 
 	fmt.Fprintf(&salutations[0], "The count is %d", 10)
 
-	done := make(chan bool)
+	done := make(chan bool, 2) // making a channel with a buffer of 2
 
 	go func() { // runs this as a go routine
 		salutations.Greet(greeting.CreatePrintFunction("<CONCURRENT>"), true)
-		done <- true // putting true onto the done channel
+		done <- true                       // putting true onto the done channel
+		time.Sleep(100 * time.Millisecond) // demonstrating that we have a race condition.
+		done <- true                       // trying to put another message on the channel immediately
+		fmt.Println("done")                //will not see this if sleep happens above.
 	}()
 
 	salutations.Greet(greeting.CreatePrintFunction("!~<3"), true)
 
-	<-done // block until getting data on the done channel. We could send that to a variable, but instead we just ignore the value
+	<-done // block until receiving message on the done channel. We could send that to a variable, but instead we just ignore the value
 }
