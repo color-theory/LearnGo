@@ -33,6 +33,13 @@ func (renametype *RenameType) Rename(newName string) {
 	renametype.Name = newName
 }
 
+func (salutations Salutations) ChannelGreeter(c chan Salutation) {
+	for _, s := range salutations{
+		c <- s
+	}
+	close(c) // we must close this channel after we are done sending messages or else we will deadlock with all channels asleep.
+}
+
 type Printer func(string) ()
 
 type Salutations []Salutation
