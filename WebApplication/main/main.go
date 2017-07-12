@@ -2,8 +2,9 @@ package main
 
 import (
 	"net/http"
-	"io/ioutil"
 	"strings"
+	"os"
+	"bufio"
 )
 
 func main() {
@@ -18,9 +19,10 @@ type MyHandler struct {
 
 func (h *MyHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	path := "public/" + req.URL.Path
-	data, err := ioutil.ReadFile(string(path))
+	f, err := os.Open(path)
 
 	if err == nil { // no problems with the file read...
+		bufferedReader := bufio.NewReader(f) //using this instead of a standard file-read will save tons of memory.
 		var contentType string
 
 		switch { //so far we only have html and css files so we check for those 2 and set the content type accordingly.
@@ -30,7 +32,7 @@ func (h *MyHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 			contentType = "text/html"
 		}
 		w.Header().Add("Content-Type", contentType)
-		w.Write(data)
+		bufferedReader.WriteTo(w)
 	} else { // throw a 404 regardless of the error.
 		w.WriteHeader(404)
 		w.Write([]byte("404 - " + http.StatusText(404)))
