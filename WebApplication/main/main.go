@@ -10,7 +10,7 @@ func main() {
 		w.Header().Add("Content Type", "text/html")
 
 		pageData := page{
-			"Example Title",
+			"Branching Example",
 			"This is my example header",
 		}
 
@@ -36,6 +36,11 @@ const doc = `
 	</head>
 	<body>
 		<h1>{{.Header}}</h1>
+		{{if eq .Title "Example Title"}}
+			<p>The title matches "Example Title" so you're seeing this.</p>
+		{{else}}
+			<p>The title does not match "Example Title" so you're seeing the other text.</p>
+		{{end}}
 	</body>
 </html>
 `
