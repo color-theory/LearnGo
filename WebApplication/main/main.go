@@ -12,12 +12,14 @@ func main() {
 		pageData := page{
 			"Branching Example",
 			"This is my example header",
+			[3]string{"Nav Item 1", "Nav Item 2", "Nav Item 3"},
 		}
 
-		tmpl, err := template.New("test").Parse(doc)
-		if err == nil{
-			tmpl.Execute(w, pageData)
-		}
+		templates := template.New("template")
+		templates.New("test").Parse(doc)
+		templates.New("headerTemplate").Parse(header)
+
+		templates.Lookup("test").Execute(w, pageData)
 	})
 
 	http.ListenAndServe(":8000", nil)
@@ -26,14 +28,19 @@ func main() {
 type page struct{
 	Title string
 	Header string
+	NavItems [3]string
 }
 
-const doc = `
+const header = `
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>{{.Title}}</title>
+		<title>{{.}}</title>
 	</head>
+`
+
+const doc = `
+	{{template "headerTemplate" .Title}}
 	<body>
 		<h1>{{.Header}}</h1>
 		{{if eq .Title "Example Title"}}
@@ -41,6 +48,11 @@ const doc = `
 		{{else}}
 			<p>The title does not match "Example Title" so you're seeing the other text.</p>
 		{{end}}
+		<ul>
+			{{range .NavItems}}
+				<li>{{.}}</li>
+			{{end}}
+		</ul>
 	</body>
 </html>
 `
